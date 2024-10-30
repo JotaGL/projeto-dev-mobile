@@ -1,83 +1,48 @@
-import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import RegisterScreen from './src/pages/RegisterScreen';
+import CatalogScreen from './src/pages/CatalogScreen';
+import CartScreen from './src/pages/CartScreen';
+import LoginScreen from './src/pages/LoginScreen';
 
-export default function App() {
+const Tab = createBottomTabNavigator();
+
+function Routes() {
   return (
-    <View style={styles.container}>
-      <Image
-        source={require("./src/assets/logo.png")}
-        style={styles.logo}
+    <Tab.Navigator>
+      <Tab.Screen 
+        name="Register" 
+        component={RegisterScreen} 
+        options={{ 
+          tabBarHideOnKeyboard: true,
+        }}
       />
-
-      <Text style={styles.title}>Lny & Nós</Text>
-
-      <Text style={styles.inputText}>Nome:</Text>
-      <TextInput style={styles.input}
-        defaultValue="Digite seu Nome..."
+      <Tab.Screen 
+        name="Login" 
+        component={LoginScreen} 
+        options={{ 
+          tabBarHideOnKeyboard: true,
+        }}
       />
-
-      <Text style={styles.inputText}>E-mail:</Text>
-      <TextInput style={styles.input}
-        defaultValue="Digite seu E-mail..."
+      <Tab.Screen 
+        name="Catalogo" 
+        component={CatalogScreen} 
+        options={{ headerShown: false }} // Oculta o cabeçalho
       />
-
-      <Text style={styles.inputText}>Senha:</Text>
-      <TextInput style={styles.input}
-        defaultValue="Digite sua Senha..."
+      <Tab.Screen 
+        name="Carrinho" 
+        component={CartScreen} 
+        options={{ headerShown: false }} // Oculta o cabeçalho
       />
-
-      <Text style={styles.inputText}>Confirmar Senha:</Text>
-      <TextInput style={styles.input}
-        defaultValue="Digite sua Senha Novamente..."
-      />
-
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Cadastro</Text>
-      </TouchableOpacity>
-    </View>
+    </Tab.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  logo: {
-    width: '24%',
-    height: '15%',
-  },
-  title: {
-    fontSize: 45,
-    marginBottom: 30
-  },
-  input: {
-    backgroundColor: "#E7E0DD",
-    width: "70%",
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 8
-  },
-  inputText: {
-    color: "#151515",
-    fontSize: 25,
-    alignSelf: 'flex-start',
-    textAlign: "center",
-    marginLeft: 63
-  },
-  button: {
-    backgroundColor: "#BA7868",
-    width: "70%",
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 8,
-    marginTop: 20
-  },
-  buttonText: {
-    color: "#FFFFFF",
-    fontSize: 22,
-  }
-})
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Routes />
+    </NavigationContainer>
+  );
+}
