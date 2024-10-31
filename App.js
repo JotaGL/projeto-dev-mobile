@@ -1,41 +1,85 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import LoginScreen from './src/pages/LoginScreen';
 import RegisterScreen from './src/pages/RegisterScreen';
+import HomeScreen from './src/pages/HomeScreen';
 import CatalogScreen from './src/pages/CatalogScreen';
 import CartScreen from './src/pages/CartScreen';
-import LoginScreen from './src/pages/LoginScreen';
+import AccontScreen from './src/pages/AccontScreen';
 
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function Routes() {
+function TabNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen 
-        name="Register" 
-        component={RegisterScreen} 
-        options={{ 
-          tabBarHideOnKeyboard: true,
-        }}
-      />
-      <Tab.Screen 
-        name="Login" 
-        component={LoginScreen} 
-        options={{ 
-          tabBarHideOnKeyboard: true,
+        name="Home" 
+        component={HomeScreen} 
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+          headerShown: false
         }}
       />
       <Tab.Screen 
         name="Catalogo" 
         component={CatalogScreen} 
-        options={{ headerShown: false }} // Oculta o cabeçalho
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="view-module" color={color} size={size} />
+          ),
+          headerShown: false
+        }}
       />
       <Tab.Screen 
         name="Carrinho" 
         component={CartScreen} 
-        options={{ headerShown: false }} // Oculta o cabeçalho
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="cart" color={color} size={size} />
+          ),
+          headerShown: false
+        }}
+      />
+      <Tab.Screen 
+        name="Conta"
+        component={AccontScreen} 
+        options={{ 
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+          headerShown: false
+        }}
       />
     </Tab.Navigator>
+  );
+}
+
+function Routes() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Register"
+        component={RegisterScreen} // Configura a tela de registro
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Main"
+        component={TabNavigator}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
   );
 }
 

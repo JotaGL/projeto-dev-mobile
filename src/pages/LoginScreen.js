@@ -25,7 +25,11 @@ export default function LoginScreen({ navigation }) {
         secureTextEntry
       />
 
-      <TouchableOpacity style={styles.button}>
+      {/* Botão de Login */}
+      <TouchableOpacity 
+        style={styles.button}
+        onPress={() => navigation.navigate('Main')} // Adiciona navegação para a tela principal
+      >
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
@@ -50,15 +54,16 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "#FFFFFF",
-    justifyContent: 'center', 
+    backgroundColor: "#f8f5f2",
     alignItems: 'center',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   logo: {
     width: '30%',
     height: undefined,
     aspectRatio: 1,
+    marginTop: 120,  // Define um valor fixo para alinhar com a tela de Registro
     marginBottom: 20,
   },
   title: {
